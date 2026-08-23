@@ -1,0 +1,228 @@
+---
+import ThemeToggle from './ThemeToggle.astro';
+import type { Locale } from '../i18n/utils';
+
+interface NavLink {
+	label: string;
+	href: string;
+}
+
+interface Props {
+	links: NavLink[];
+	ctaLabel?: string;
+	ctaHref?: string;
+	locale?: Locale;
+	siteName?: string;
+}
+
+const { links, ctaLabel, ctaHref, locale = 'en', siteName = 'Pulsar Stack' } = Astro.props;
+
+const currentPath = Astro.url.pathname;
+const otherLocale: Locale = locale === 'en' ? 'fr' : 'en';
+const otherLocalePath =
+	locale === 'en'
+		? `/fr${currentPath === '/' ? '' : currentPath}`
+		: currentPath.replace(/^\/fr/, '') || '/';
+---
+
+<header class="navbar">
+	<nav class="navbar-inner container" aria-label="Main navigation">
+		<a href={locale === 'fr' ? '/fr' : '/'} class="brand" aria-label={`${siteName} home`}>
+			{siteName}
+		</a>
+
+		<button
+			type="button"
+			class="burger"
+			id="navbar-burger"
+			aria-expanded="false"
+			aria-controls="navbar-menu"
+			aria-label="Toggle menu"
+		>
+			<span></span>
+			<span></span>
+			<span></span>
+		</button>
+
+		<div class="navbar-menu" id="navbar-menu">
+			<ul class="nav-links">
+				{
+					links.map((link) => (
+						<li>
+							<a href={link.href} aria-current={currentPath === link.href ? 'page' : undefined}>
+								{link.label}
+							</a>
+						</li>
+					))
+				}
+			</ul>
+
+			<div class="navbar-actions">
+				<a href={otherLocalePath} class="lang-switch" hreflang={otherLocale}>
+					{otherLocale.toUpperCase()}
+				</a>
+				<ThemeToggle />
+				{
+					ctaLabel && ctaHref && (
+						<a href={ctaHref} class="btn btn-primary">
+							{ctaLabel}
+						</a>
+					)
+				}
+			</div>
+		</div>
+	</nav>
+</header>
+
+<style>
+	.navbar {
+		position: sticky;
+		top: 0;
+		z-index: 50;
+		background: color-mix(in srgb, var(--bg) 75%, transparent);
+		backdrop-filter: blur(12px) saturate(1.4);
+		-webkit-backdrop-filter: blur(12px) saturate(1.4);
+		border-bottom: 1px solid var(--border);
+	}
+
+	.navbar-inner {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: var(--space-4);
+		padding-block: var(--space-4);
+	}
+
+	.brand {
+		font-weight: 800;
+		font-size: var(--fs-lg);
+		text-decoration: none;
+		letter-spacing: -0.01em;
+	}
+
+	.burger {
+		display: none;
+		flex-direction: column;
+		justify-content: center;
+		gap: 4px;
+		width: 2.25rem;
+		height: 2.25rem;
+		background: transparent;
+		border: 1px solid var(--border);
+		border-radius: var(--radius-sm);
+	}
+
+	.burger span {
+		display: block;
+		width: 1.1rem;
+		height: 2px;
+		margin-inline: auto;
+		background: var(--text);
+		transition: transform var(--transition-fast), opacity var(--transition-fast);
+	}
+
+	.navbar-menu {
+		display: flex;
+		align-items: center;
+		gap: var(--space-6);
+	}
+
+	.nav-links {
+		display: flex;
+		align-items: center;
+		gap: var(--space-5);
+	}
+
+	.nav-links a {
+		text-decoration: none;
+		font-size: var(--fs-sm);
+		font-weight: 500;
+		color: var(--text-muted);
+		transition: color var(--transition-fast);
+	}
+
+	.nav-links a:hover,
+	.nav-links a[aria-current='page'] {
+		color: var(--text);
+	}
+
+	.navbar-actions {
+		display: flex;
+		align-items: center;
+		gap: var(--space-3);
+	}
+
+	.lang-switch {
+		font-size: var(--fs-xs);
+		font-weight: 700;
+		text-decoration: none;
+		color: var(--text-muted);
+		border: 1px solid var(--border);
+		border-radius: var(--radius-full);
+		padding: var(--space-1) var(--space-3);
+		transition: color var(--transition-fast), border-color var(--transition-fast);
+	}
+
+	.lang-switch:hover {
+		color: var(--text);
+		border-color: var(--accent);
+	}
+
+	@media (max-width: 860px) {
+		.burger {
+			display: flex;
+		}
+
+		.navbar-menu {
+			position: absolute;
+			top: 100%;
+			left: 0;
+			right: 0;
+			flex-direction: column;
+			align-items: stretch;
+			gap: var(--space-5);
+			background: var(--bg);
+			border-bottom: 1px solid var(--border);
+			padding: var(--space-5) var(--container-padding);
+			transform-origin: top;
+			transform: scaleY(0);
+			opacity: 0;
+			pointer-events: none;
+			transition: transform var(--transition-base), opacity var(--transition-base);
+		}
+
+		.navbar-menu.is-open {
+			transform: scaleY(1);
+			opacity: 1;
+			pointer-events: auto;
+		}
+
+		.nav-links {
+			flex-direction: column;
+			align-items: flex-start;
+			gap: var(--space-4);
+		}
+
+		.navbar-actions {
+			justify-content: space-between;
+			width: 100%;
+		}
+	}
+</style>
+
+<script>
+	const burger = document.getElementById('navbar-burger');
+	const menu = document.getElementById('navbar-menu');
+
+	burger?.addEventListener('click', () => {
+		const isOpen = menu?.classList.toggle('is-open');
+		burger.setAttribute('aria-expanded', String(Boolean(isOpen)));
+	});
+
+	menu?.querySelectorAll('a').forEach((link) => {
+		link.addEventListener('click', () => {
+			menu.classList.remove('is-open');
+			burger?.setAttribute('aria-expanded', 'false');
+		});
+	});
+</script>

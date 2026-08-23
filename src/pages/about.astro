@@ -1,0 +1,40 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { useTranslations } from '../i18n/utils';
+
+const locale = 'en' as const;
+const t = useTranslations(locale);
+---
+
+<BaseLayout locale={locale} title={t.about.title} description={t.about.intro}>
+	<section class="section about">
+		<div class="container about-inner">
+			<p class="eyebrow">{t.about.eyebrow}</p>
+			<h1>{t.about.title}</h1>
+			<p class="about-intro">{t.about.intro}</p>
+			{t.about.body.map((paragraph) => <p class="text-muted about-paragraph">{paragraph}</p>)}
+		</div>
+	</section>
+</BaseLayout>
+
+<style>
+	.about-inner {
+		max-width: 42rem;
+	}
+
+	.about h1 {
+		font-size: var(--fs-4xl);
+		margin-bottom: var(--space-5);
+	}
+
+	.about-intro {
+		font-size: var(--fs-lg);
+		line-height: var(--lh-relaxed);
+		margin-bottom: var(--space-5);
+	}
+
+	.about-paragraph {
+		line-height: var(--lh-relaxed);
+		margin-bottom: var(--space-4);
+	}
+</style>

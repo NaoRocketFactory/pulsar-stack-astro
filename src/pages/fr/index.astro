@@ -1,8 +1,8 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import { useTranslations } from '../i18n/utils';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { useTranslations } from '../../i18n/utils';
 
-const locale = 'en' as const;
+const locale = 'fr' as const;
 const t = useTranslations(locale);
 ---
 
@@ -13,8 +13,8 @@ const t = useTranslations(locale);
 			<h1>{t.hero.title}</h1>
 			<p class="hero-subtitle">{t.hero.subtitle}</p>
 			<div class="hero-actions">
-				<a href={t.navbar.ctaHref} class="btn btn-primary">{t.hero.ctaPrimary}</a>
-				<a href="/about" class="btn btn-secondary">{t.hero.ctaSecondary}</a>
+				<a href={`/fr${t.navbar.ctaHref}`} class="btn btn-primary">{t.hero.ctaPrimary}</a>
+				<a href="/fr/about" class="btn btn-secondary">{t.hero.ctaSecondary}</a>
 			</div>
 		</div>
 	</section>
@@ -40,7 +40,7 @@ const t = useTranslations(locale);
 		<div class="container cta-inner">
 			<h2>{t.cta.title}</h2>
 			<p class="text-muted">{t.cta.subtitle}</p>
-			<a href="/contact" class="btn btn-primary">{t.cta.button}</a>
+			<a href="/fr/contact" class="btn btn-primary">{t.cta.button}</a>
 		</div>
 	</section>
 </BaseLayout>

@@ -1,0 +1,110 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { useTranslations } from '../../i18n/utils';
+
+const locale = 'en' as const;
+const t = useTranslations(locale);
+
+const posts = (await getCollection('blog', ({ data }) => data.lang === locale && !data.draft)).sort(
+	(a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+---
+
+<BaseLayout locale={locale} title={t.blog.title} description={t.blog.subtitle}>
+	<section class="section blog-list">
+		<div class="container">
+			<p class="eyebrow">{t.blog.eyebrow}</p>
+			<h1>{t.blog.title}</h1>
+			<p class="text-muted blog-subtitle">{t.blog.subtitle}</p>
+
+			{
+				posts.length === 0 ? (
+					<p class="text-muted">{t.blog.empty}</p>
+				) : (
+					<div class="blog-grid">
+						{posts.map((post) => (
+							<a href={`/blog/${post.id}`} class="card blog-card">
+								<time datetime={post.data.date.toISOString()} class="blog-date">
+									{post.data.date.toLocaleDateString(locale, { year: 'numeric', month: 'long', day: 'numeric' })}
+								</time>
+								<h2>{post.data.title}</h2>
+								<p class="text-muted">{post.data.description}</p>
+								{post.data.tags.length > 0 && (
+									<ul class="tag-list">
+										{post.data.tags.map((tag) => (
+											<li class="tag">{tag}</li>
+										))}
+									</ul>
+								)}
+							</a>
+						))}
+					</div>
+				)
+			}
+		</div>
+	</section>
+</BaseLayout>
+
+<style>
+	.blog-list h1 {
+		font-size: var(--fs-4xl);
+		margin-bottom: var(--space-2);
+	}
+
+	.blog-subtitle {
+		margin-bottom: var(--space-8);
+	}
+
+	.blog-grid {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: var(--space-5);
+	}
+
+	.blog-card {
+		display: block;
+		text-decoration: none;
+		color: var(--text);
+	}
+
+	.blog-card:hover {
+		transform: translateY(-2px);
+		box-shadow: var(--shadow-md);
+		border-color: var(--accent);
+	}
+
+	.blog-date {
+		display: block;
+		font-size: var(--fs-xs);
+		color: var(--text-muted);
+		margin-bottom: var(--space-2);
+	}
+
+	.blog-card h2 {
+		font-size: var(--fs-xl);
+		margin-bottom: var(--space-2);
+	}
+
+	.tag-list {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--space-2);
+		margin-top: var(--space-4);
+	}
+
+	.tag {
+		font-size: var(--fs-xs);
+		font-weight: 600;
+		padding: var(--space-1) var(--space-3);
+		border-radius: var(--radius-full);
+		background: var(--bg);
+		border: 1px solid var(--border);
+	}
+
+	@media (max-width: 700px) {
+		.blog-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

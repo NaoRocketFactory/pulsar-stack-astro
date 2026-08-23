@@ -1,0 +1,57 @@
+---
+import type { Locale } from '../i18n/utils';
+
+interface Props {
+	title: string;
+	description: string;
+	image?: string;
+	locale: Locale;
+	type?: 'website' | 'article';
+}
+
+const { title, description, image = '/favicon.svg', locale, type = 'website' } = Astro.props;
+
+const siteUrl = Astro.site ?? new URL(Astro.url.origin);
+const canonicalUrl = new URL(Astro.url.pathname, siteUrl);
+const imageUrl = new URL(image, siteUrl);
+
+const jsonLd = {
+	'@context': 'https://schema.org',
+	'@graph': [
+		{
+			'@type': 'WebSite',
+			'@id': `${siteUrl}#website`,
+			url: siteUrl.toString(),
+			name: title,
+			description,
+			inLanguage: locale,
+		},
+		{
+			'@type': 'Person',
+			'@id': `${siteUrl}#person`,
+			name: 'Your Name',
+			url: siteUrl.toString(),
+		},
+	],
+};
+---
+
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonicalUrl} />
+
+<!-- Open Graph -->
+<meta property="og:type" content={type} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonicalUrl} />
+<meta property="og:image" content={imageUrl} />
+<meta property="og:locale" content={locale === 'fr' ? 'fr_FR' : 'en_US'} />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={imageUrl} />
+
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} is:inline />

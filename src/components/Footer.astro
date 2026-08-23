@@ -1,0 +1,129 @@
+---
+interface FooterLink {
+	label: string;
+	href: string;
+}
+
+interface Props {
+	siteName: string;
+	links: FooterLink[];
+	tagline?: string;
+	navigateLabel?: string;
+	contactLabel?: string;
+	contactEmail?: string;
+	rightsLabel?: string;
+}
+
+const {
+	siteName,
+	links,
+	tagline,
+	navigateLabel = 'Navigate',
+	contactLabel = 'Contact',
+	contactEmail,
+	rightsLabel = 'All rights reserved.',
+} = Astro.props;
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+	<div class="container footer-grid">
+		<div class="footer-brand">
+			<p class="brand-name">{siteName}</p>
+			{tagline && <p class="text-muted">{tagline}</p>}
+		</div>
+
+		<nav aria-label={navigateLabel}>
+			<p class="footer-heading">{navigateLabel}</p>
+			<ul>
+				{
+					links.map((link) => (
+						<li>
+							<a href={link.href}>{link.label}</a>
+						</li>
+					))
+				}
+			</ul>
+		</nav>
+
+		<div>
+			<p class="footer-heading">{contactLabel}</p>
+			{
+				contactEmail && (
+					<a class="footer-email" href={`mailto:${contactEmail}`}>
+						{contactEmail}
+					</a>
+				)
+			}
+		</div>
+	</div>
+
+	<div class="container footer-bottom">
+		<p class="text-muted">© {year} {siteName}. {rightsLabel}</p>
+	</div>
+</footer>
+
+<style>
+	.site-footer {
+		border-top: 1px solid var(--border);
+		background: var(--surface);
+		padding-block-start: var(--space-10);
+	}
+
+	.footer-grid {
+		display: grid;
+		grid-template-columns: 2fr 1fr 1fr;
+		gap: var(--space-8);
+		padding-block-end: var(--space-8);
+	}
+
+	.footer-brand .brand-name {
+		font-weight: 800;
+		font-size: var(--fs-lg);
+		margin-bottom: var(--space-2);
+	}
+
+	.footer-heading {
+		font-size: var(--fs-sm);
+		font-weight: 700;
+		margin-bottom: var(--space-3);
+	}
+
+	.site-footer ul {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-2);
+	}
+
+	.site-footer a {
+		text-decoration: none;
+		color: var(--text-muted);
+		font-size: var(--fs-sm);
+		transition: color var(--transition-fast);
+	}
+
+	.site-footer a:hover {
+		color: var(--text);
+	}
+
+	.footer-email {
+		display: inline-block;
+	}
+
+	.footer-bottom {
+		border-top: 1px solid var(--border);
+		padding-block: var(--space-5);
+	}
+
+	.footer-bottom p {
+		font-size: var(--fs-xs);
+	}
+
+	@media (max-width: 640px) {
+		.footer-grid {
+			grid-template-columns: 1fr;
+			gap: var(--space-6);
+		}
+	}
+</style>
