@@ -29,15 +29,15 @@ export const en = {
 		],
 		contact: {
 			title: 'Contact',
-			email: 'hello@example.com',
+			email: 'starterrocket.dev@gmail.com',
 		},
 		rights: 'All rights reserved.',
 	},
 	hero: {
-		eyebrow: 'Astro Starter Kit',
-		title: 'Ship your next site at light speed.',
+		eyebrow: 'Astro 7 Starter Kit',
+		title: 'Launch your next site\nwith Astro 7.',
 		subtitle:
-			'Pulsar Stack is a production-ready Astro starter with a native CSS design system, dark mode, i18n and a content-driven blog — built to be resold and rebranded in minutes.',
+			'Pulsar Stack is a production-ready Astro starter with native CSS design system, dark mode, i18n EN/FR and a blog — ready in 5 minutes.',
 		ctaPrimary: 'Get Started',
 		ctaSecondary: 'Learn more',
 	},
@@ -78,9 +78,10 @@ export const en = {
 		],
 	},
 	cta: {
-		title: 'Ready to launch your next project?',
-		subtitle: 'Clone the starter, swap the tokens, ship your brand.',
-		button: 'Get in touch',
+		title: 'Ready to ship faster?',
+		subtitle: 'Get Pulsar Stack and launch your next project today.',
+		button: 'Buy Pulsar Stack — 19€',
+		buttonHref: 'https://naorocketfactory.dev/kits/pulsar-stack',
 	},
 	about: {
 		eyebrow: 'About',
