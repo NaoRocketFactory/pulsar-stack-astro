@@ -9,11 +9,13 @@ interface NavLink {
 
 interface Props {
 	links: NavLink[];
+	buyLabel?: string;
+	buyHref?: string;
 	locale?: Locale;
 	siteName?: string;
 }
 
-const { links, locale = 'en', siteName = 'Pulsar Stack' } = Astro.props;
+const { links, buyLabel, buyHref, locale = 'en', siteName = 'Pulsar Stack' } = Astro.props;
 
 const currentPath = Astro.url.pathname;
 const otherLocale: Locale = locale === 'en' ? 'fr' : 'en';
@@ -60,6 +62,13 @@ const otherLocalePath =
 					{otherLocale.toUpperCase()}
 				</a>
 				<ThemeToggle />
+				{
+					buyLabel && buyHref && (
+						<a href={buyHref} class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+							{buyLabel}
+						</a>
+					)
+				}
 			</div>
 		</div>
 	</nav>

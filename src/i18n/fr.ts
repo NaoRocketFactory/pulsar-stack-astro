@@ -10,8 +10,9 @@ export const fr = {
 			{ label: 'Accueil', href: '/' },
 			{ label: 'À propos', href: '/about' },
 			{ label: 'Blog', href: '/blog' },
-			{ label: 'Contact', href: '/contact' },
 		],
+		buyLabel: 'Acheter — 19€',
+		buyHref: 'https://naorocketfactory.dev/kits/pulsar-stack',
 	},
 	footer: {
 		tagline: 'Un kit de démarrage moderne conçu pour la rapidité, la clarté et une personnalisation facile.',
@@ -23,7 +24,7 @@ export const fr = {
 			{ label: 'Accueil', href: '/' },
 			{ label: 'À propos', href: '/about' },
 			{ label: 'Blog', href: '/blog' },
-			{ label: 'Contact', href: '/contact' },
+			{ label: 'Contact', href: 'mailto:starterrocket.dev@gmail.com' },
 		],
 		contact: {
 			title: 'Contact',
@@ -97,19 +98,5 @@ export const fr = {
 		readMore: 'Lire la suite',
 		backToBlog: 'Retour au blog',
 		empty: 'Aucun article publié pour le moment.',
-	},
-	contact: {
-		eyebrow: 'Contact',
-		title: 'Discutons',
-		subtitle: 'Une question ou un projet en tête ? Envoyez-nous un message.',
-		form: {
-			name: 'Nom',
-			namePlaceholder: 'Votre nom',
-			email: 'Email',
-			emailPlaceholder: 'vous@exemple.com',
-			message: 'Message',
-			messagePlaceholder: 'Parlez-nous de votre projet...',
-			submit: 'Envoyer le message',
-		},
 	},
 } as const;
