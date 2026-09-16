@@ -12,8 +12,6 @@ export const fr = {
 			{ label: 'Blog', href: '/blog' },
 			{ label: 'Contact', href: '/contact' },
 		],
-		ctaLabel: 'Commencer',
-		ctaHref: '/contact',
 	},
 	footer: {
 		tagline: 'Un kit de démarrage moderne conçu pour la rapidité, la clarté et une personnalisation facile.',
@@ -38,7 +36,6 @@ export const fr = {
 		title: 'Lancez votre prochain site\navec Astro 7.',
 		subtitle:
 			'Pulsar Stack est un starter Astro production-ready avec design system CSS natif, dark mode, i18n EN/FR et un blog — opérationnel en 5 minutes.',
-		ctaPrimary: 'Commencer',
 		ctaSecondary: 'En savoir plus',
 	},
 	features: {

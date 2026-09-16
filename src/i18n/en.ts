@@ -12,8 +12,6 @@ export const en = {
 			{ label: 'Blog', href: '/blog' },
 			{ label: 'Contact', href: '/contact' },
 		],
-		ctaLabel: 'Get Started',
-		ctaHref: '/contact',
 	},
 	footer: {
 		tagline: 'A modern starter kit built for speed, clarity and easy customization.',
@@ -38,7 +36,6 @@ export const en = {
 		title: 'Launch your next site\nwith Astro 7.',
 		subtitle:
 			'Pulsar Stack is a production-ready Astro starter with native CSS design system, dark mode, i18n EN/FR and a blog — ready in 5 minutes.',
-		ctaPrimary: 'Get Started',
 		ctaSecondary: 'Learn more',
 	},
 	features: {

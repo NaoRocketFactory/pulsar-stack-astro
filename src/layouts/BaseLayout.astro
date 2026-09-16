@@ -79,13 +79,7 @@ const footerLinks = t.footer.links.map((link) => ({
 	</head>
 	<body>
 		<a href="#main-content" class="sr-only">Skip to content</a>
-		<Navbar
-			links={navLinks}
-			ctaLabel={t.navbar.ctaLabel}
-			ctaHref={localizePath(t.navbar.ctaHref, locale)}
-			locale={locale}
-			siteName={t.meta.siteName}
-		/>
+		<Navbar links={navLinks} locale={locale} siteName={t.meta.siteName} />
 		<main id="main-content">
 			<slot />
 		</main>
