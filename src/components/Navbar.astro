@@ -28,7 +28,8 @@ const otherLocalePath =
 <header class="navbar">
 	<nav class="navbar-inner container" aria-label="Main navigation">
 		<a href={locale === 'fr' ? '/fr' : '/'} class="brand" aria-label={`${siteName} home`}>
-			{siteName}
+			<img src="/logo/pulsar-stack-cut.png" alt="" class="brand-logo" width="40" height="40" />
+			<span>{siteName}</span>
 		</a>
 
 		<button
@@ -94,10 +95,20 @@ const otherLocalePath =
 	}
 
 	.brand {
+		display: inline-flex;
+		align-items: center;
+		gap: var(--space-2);
 		font-weight: 800;
 		font-size: var(--fs-lg);
 		text-decoration: none;
 		letter-spacing: -0.01em;
+	}
+
+	.brand-logo {
+		height: 40px;
+		width: auto;
+		background: transparent;
+		filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.25));
 	}
 
 	.burger {

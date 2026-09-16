@@ -9,6 +9,9 @@ const t = useTranslations(locale);
 <BaseLayout locale={locale}>
 	<section class="hero">
 		<div class="container hero-inner">
+			<div class="hero-logo">
+				<img src="/logo/pulsar-stack-cut.png" alt="Pulsar Stack" class="hero-logo-img" width="120" height="120" />
+			</div>
 			<p class="eyebrow">{t.hero.eyebrow}</p>
 			<h1>{t.hero.title}</h1>
 			<p class="hero-subtitle">{t.hero.subtitle}</p>
@@ -73,6 +76,39 @@ const t = useTranslations(locale);
 		display: flex;
 		flex-wrap: wrap;
 		gap: var(--space-3);
+	}
+
+	.hero-logo {
+		position: relative;
+		display: inline-flex;
+		margin-bottom: var(--space-6);
+	}
+
+	.hero-logo::before {
+		content: '';
+		position: absolute;
+		inset: -25%;
+		background: radial-gradient(circle, color-mix(in srgb, var(--accent) 45%, transparent) 0%, transparent 70%);
+		filter: blur(24px);
+		z-index: -1;
+	}
+
+	.hero-logo-img {
+		height: 120px;
+		width: auto;
+		background: transparent;
+		filter: drop-shadow(0 10px 28px color-mix(in srgb, var(--accent) 55%, transparent));
+		animation: hero-logo-float 6s ease-in-out infinite;
+	}
+
+	@keyframes hero-logo-float {
+		0%,
+		100% {
+			transform: translateY(0);
+		}
+		50% {
+			transform: translateY(-14px);
+		}
 	}
 
 	.features h2 {
