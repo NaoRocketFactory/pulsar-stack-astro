@@ -10,7 +10,9 @@ const t = useTranslations(locale);
 	<section class="hero">
 		<div class="container hero-inner">
 			<div class="hero-logo">
-				<img src="/logo/pulsar-stack-cut.png" alt="Pulsar Stack" class="hero-logo-img" width="120" height="120" />
+				<div class="hero-logo-inner">
+					<img src="/logo/pulsar-stack-cut.png" alt="Pulsar Stack" class="hero-logo-img" width="120" height="120" />
+				</div>
 			</div>
 			<p class="eyebrow">{t.hero.eyebrow}</p>
 			<h1>{t.hero.title}</h1>
@@ -56,16 +58,19 @@ const t = useTranslations(locale);
 	}
 
 	.hero-inner {
-		max-width: 44rem;
+		max-width: 54rem;
+		margin-inline: auto;
+		text-align: center;
 	}
 
 	.hero h1 {
 		font-size: var(--fs-5xl);
 		margin-bottom: var(--space-5);
-		white-space: pre-line;
 	}
 
 	.hero-subtitle {
+		max-width: 36rem;
+		margin-inline: auto;
 		font-size: var(--fs-lg);
 		color: var(--text-muted);
 		line-height: var(--lh-relaxed);
@@ -75,22 +80,33 @@ const t = useTranslations(locale);
 	.hero-actions {
 		display: flex;
 		flex-wrap: wrap;
+		justify-content: center;
 		gap: var(--space-3);
 	}
 
 	.hero-logo {
-		position: relative;
-		display: inline-flex;
-		margin-bottom: var(--space-6);
+		display: flex;
+		justify-content: center;
+		margin-bottom: var(--space-5);
 	}
 
-	.hero-logo::before {
+	.hero-logo-inner {
+		position: relative;
+		display: inline-flex;
+	}
+
+	.hero-logo-inner::before {
 		content: '';
 		position: absolute;
-		inset: -25%;
-		background: radial-gradient(circle, color-mix(in srgb, var(--accent) 45%, transparent) 0%, transparent 70%);
-		filter: blur(24px);
+		top: 50%;
+		left: 50%;
+		width: 280px;
+		height: 280px;
+		transform: translate(-50%, -50%);
+		background: radial-gradient(circle, color-mix(in srgb, var(--accent) 32%, transparent) 0%, transparent 72%);
+		filter: blur(32px);
 		z-index: -1;
+		pointer-events: none;
 	}
 
 	.hero-logo-img {

@@ -34,7 +34,7 @@ export const fr = {
 	},
 	hero: {
 		eyebrow: 'Starter Kit Astro 7',
-		title: 'Lancez votre prochain site\navec Astro 7.',
+		title: 'Lancez votre prochain site avec Astro 7.',
 		subtitle:
 			'Pulsar Stack est un starter Astro production-ready avec design system CSS natif, dark mode, i18n EN/FR et un blog — opérationnel en 5 minutes.',
 		ctaSecondary: 'En savoir plus',
