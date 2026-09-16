@@ -12,6 +12,8 @@ interface Props {
 	contactLabel?: string;
 	contactEmail?: string;
 	rightsLabel?: string;
+	builtWith?: string;
+	builtWithHref?: string;
 }
 
 const {
@@ -22,6 +24,8 @@ const {
 	contactLabel = 'Contact',
 	contactEmail,
 	rightsLabel = 'All rights reserved.',
+	builtWith,
+	builtWithHref,
 } = Astro.props;
 
 const year = new Date().getFullYear();
@@ -32,6 +36,24 @@ const year = new Date().getFullYear();
 		<div class="footer-brand">
 			<p class="brand-name">{siteName}</p>
 			{tagline && <p class="text-muted">{tagline}</p>}
+			{
+				builtWith && builtWithHref && (
+					<a class="built-with" href={builtWithHref} target="_blank" rel="noopener noreferrer">
+						<svg class="astro-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+							<path
+								d="M12 2.4c-.33 0-.62.2-.75.51L5.62 18.9a.75.75 0 0 0 .7 1.02h1.8a.75.75 0 0 0 .71-.5l.6-1.75h5.14l.6 1.75a.75.75 0 0 0 .71.5h1.8a.75.75 0 0 0 .7-1.02L12.75 2.91a.8.8 0 0 0-.75-.51Zm0 5.1 1.73 5.06h-3.46L12 7.5Z"
+								fill="currentColor"
+							/>
+							<path
+								d="M8.83 21.2c.57.62 1.43.98 3.17.98s2.6-.36 3.17-.98a.35.35 0 0 0-.36-.57c-.83.28-1.75.43-2.81.43s-1.98-.15-2.81-.43a.35.35 0 0 0-.36.57Z"
+								fill="currentColor"
+								opacity=".55"
+							/>
+						</svg>
+						{builtWith}
+					</a>
+				)
+			}
 		</div>
 
 		<nav aria-label={navigateLabel}>
@@ -109,6 +131,18 @@ const year = new Date().getFullYear();
 
 	.footer-email {
 		display: inline-block;
+	}
+
+	.built-with {
+		display: inline-flex;
+		align-items: center;
+		gap: var(--space-2);
+		margin-top: var(--space-3);
+		font-size: var(--fs-sm);
+	}
+
+	.astro-icon {
+		color: #bc52ee;
 	}
 
 	.footer-bottom {

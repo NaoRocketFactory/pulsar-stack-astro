@@ -11,15 +11,33 @@ const t = useTranslations(locale);
 		<div class="container hero-inner">
 			<div class="hero-logo">
 				<div class="hero-logo-inner">
-					<img src="/logo/pulsar-stack-cut.png" alt="Pulsar Stack" class="hero-logo-img" width="120" height="120" />
+					<img src="/logo/pulsar-stack-cut.png" alt="Pulsar Stack" class="hero-logo-img" width="176" height="176" />
 				</div>
 			</div>
-			<p class="eyebrow">{t.hero.eyebrow}</p>
 			<h1>{t.hero.title}</h1>
 			<p class="hero-subtitle">{t.hero.subtitle}</p>
 			<div class="hero-actions">
 				<a href="/about" class="btn btn-primary">{t.hero.ctaSecondary}</a>
 			</div>
+			<a
+				href={t.hero.poweredByHref}
+				class="powered-by"
+				target="_blank"
+				rel="noopener noreferrer"
+			>
+				<svg class="astro-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+					<path
+						d="M12 2.4c-.33 0-.62.2-.75.51L5.62 18.9a.75.75 0 0 0 .7 1.02h1.8a.75.75 0 0 0 .71-.5l.6-1.75h5.14l.6 1.75a.75.75 0 0 0 .71.5h1.8a.75.75 0 0 0 .7-1.02L12.75 2.91a.8.8 0 0 0-.75-.51Zm0 5.1 1.73 5.06h-3.46L12 7.5Z"
+						fill="currentColor"
+					></path>
+					<path
+						d="M8.83 21.2c.57.62 1.43.98 3.17.98s2.6-.36 3.17-.98a.35.35 0 0 0-.36-.57c-.83.28-1.75.43-2.81.43s-1.98-.15-2.81-.43a.35.35 0 0 0-.36.57Z"
+						fill="currentColor"
+						opacity=".55"
+					></path>
+				</svg>
+				{t.hero.poweredBy}
+			</a>
 		</div>
 	</section>
 
@@ -82,6 +100,30 @@ const t = useTranslations(locale);
 		flex-wrap: wrap;
 		justify-content: center;
 		gap: var(--space-3);
+		margin-bottom: var(--space-6);
+	}
+
+	.powered-by {
+		display: inline-flex;
+		align-items: center;
+		gap: var(--space-2);
+		font-size: var(--fs-xs);
+		font-weight: 600;
+		color: var(--text-muted);
+		text-decoration: none;
+		border: 1px solid var(--border);
+		border-radius: var(--radius-full);
+		padding: var(--space-1) var(--space-4);
+		transition: color var(--transition-fast), border-color var(--transition-fast);
+	}
+
+	.powered-by:hover {
+		color: var(--text);
+		border-color: var(--accent);
+	}
+
+	.astro-icon {
+		color: #bc52ee;
 	}
 
 	.hero-logo {
@@ -100,20 +142,20 @@ const t = useTranslations(locale);
 		position: absolute;
 		top: 50%;
 		left: 50%;
-		width: 280px;
-		height: 280px;
+		width: 400px;
+		height: 400px;
 		transform: translate(-50%, -50%);
 		background: radial-gradient(circle, color-mix(in srgb, var(--accent) 32%, transparent) 0%, transparent 72%);
-		filter: blur(32px);
+		filter: blur(36px);
 		z-index: -1;
 		pointer-events: none;
 	}
 
 	.hero-logo-img {
-		height: 120px;
+		height: 176px;
 		width: auto;
 		background: transparent;
-		filter: drop-shadow(0 10px 28px color-mix(in srgb, var(--accent) 55%, transparent));
+		filter: drop-shadow(0 14px 32px color-mix(in srgb, var(--accent) 55%, transparent));
 		animation: hero-logo-float 6s ease-in-out infinite;
 	}
 

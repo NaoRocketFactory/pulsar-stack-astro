@@ -30,14 +30,17 @@ export const en = {
 			title: 'Contact',
 			email: 'starterrocket.dev@gmail.com',
 		},
+		builtWith: 'Built with Astro 7 →',
+		builtWithHref: 'https://astro.build',
 		rights: 'All rights reserved.',
 	},
 	hero: {
-		eyebrow: 'Astro 7 Starter Kit',
 		title: 'Launch your next site with Astro 7.',
 		subtitle:
 			'Pulsar Stack is a production-ready Astro starter with native CSS design system, dark mode, i18n EN/FR and a blog — ready in 5 minutes.',
 		ctaSecondary: 'Learn more',
+		poweredBy: 'Powered by Astro 7',
+		poweredByHref: 'https://astro.build',
 	},
 	features: {
 		eyebrow: 'Why Pulsar Stack',
